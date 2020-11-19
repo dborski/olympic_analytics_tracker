@@ -14,7 +14,8 @@ class Command(BaseCommand):
     with open(file_location, 'r') as csvfile:
       reader = csv.DictReader(csvfile)
       total_time = 0.
-      for row in reader:
+      dot_string = ''
+      for i, row in enumerate(reader):
         start = time.time()
         height = None if row['Height'] == 'NA' else int(row['Height'])
         weight = None if row['Weight'] == 'NA' else int(row['Weight'])
@@ -42,6 +43,9 @@ class Command(BaseCommand):
 
         stop = time.time()
         total_time += (stop - start)
+        if i % 700 == 0 and i != 0:
+          dot_string = dot_string + '.'
+          print(dot_string)
 
     print(f'import_csv script has completed in {round(total_time, 2)} seconds')
 
