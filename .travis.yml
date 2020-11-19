@@ -6,7 +6,7 @@ install:
 services:
 - postgresql
 script:
-- "./manage.py test"
+# - "./manage.py test"
 deploy:
   provider: heroku
   api_key:
