@@ -1,1 +1,1 @@
-web: gunicorn api.wsgi
+web: gunicorn olympic_analytics_tracker.wsgi
