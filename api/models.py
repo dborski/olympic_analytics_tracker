@@ -9,9 +9,9 @@ class Olympian(models.Model):
   ]
   name = models.CharField(max_length=100)
   sex = models.CharField(max_length=1, choices=GENDER)
-  age = models.IntegerField()
-  height = models.IntegerField()
-  weight = models.IntegerField()
+  age = models.IntegerField(blank=True, null=True)
+  height = models.IntegerField(blank=True, null=True)
+  weight = models.IntegerField(blank=True, null=True)
   team = models.CharField(max_length=100)
   sport = models.CharField(max_length=100)
   created_at = models.DateTimeField(auto_now_add=True)
