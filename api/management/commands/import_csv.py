@@ -9,7 +9,7 @@ file_location = './api/fixtures/olympic_data_2016.csv'
 class Command(BaseCommand):
 
   def handle(self, *args, **options):
-    print('Beginning import_csv script')
+    print('Now starting import_csv script....')
 
     with open(file_location, 'r') as csvfile:
       reader = csv.DictReader(csvfile)
@@ -39,8 +39,9 @@ class Command(BaseCommand):
           event_id=event.id, 
           medal=row['Medal']
         )
+
         stop = time.time()
-        total_time += stop - start
+        total_time += (stop - start)
 
     print(f'import_csv script has completed in {round(total_time, 2)} seconds')
 
