@@ -1,5 +1,6 @@
 from .base import *
-import psycopg2
+import os
+# import psycopg2
 import dj_database_url
 import django_heroku
 
