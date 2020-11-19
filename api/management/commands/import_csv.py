@@ -15,6 +15,7 @@ class Command(BaseCommand):
       reader = csv.DictReader(csvfile)
       total_time = 0.
       dot_string = ''
+      
       for i, row in enumerate(reader):
         start = time.time()
         height = None if row['Height'] == 'NA' else int(row['Height'])
