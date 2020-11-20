@@ -75,3 +75,23 @@ class OlympianViewSet(TestCase):
 
     self.assertEqual(response.status_code, 200)
     self.assertEqual(json_response, expected)
+
+  def test_happy_path_get_oldest_olympian(self):
+    response = self.client.get('/api/v1/olympians?age=oldest')
+
+    json_response = response.json()
+
+    expected = {
+      'olympians': [
+        {
+          'name': self.olympian3.name,
+          'team': self.olympian3.team,
+          'age': self.olympian3.age,
+          'sport': self.olympian3.sport,
+          'total_medals_won': 0
+        }
+      ]
+    }
+
+    self.assertEqual(response.status_code, 200)
+    self.assertEqual(json_response, expected)
