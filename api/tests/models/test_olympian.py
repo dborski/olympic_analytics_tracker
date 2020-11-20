@@ -51,7 +51,7 @@ class OlympianModelTest(TestCase):
     
     self.assertEqual(Olympian.all_olympians(), expected)
 
-  def test_youngest_olympian(self):
+  def test_youngest_oldest_olympian(self):
     expected_youngest = [
       {
           'name': self.olympian2.name,

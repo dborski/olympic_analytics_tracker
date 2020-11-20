@@ -51,7 +51,6 @@ class Olympian(models.Model):
     return [_olympian_payload(olympian) for olympian in olympians]
 
 
-
 class Event(models.Model):
   name = models.CharField(max_length=100)
   games = models.CharField(max_length=100)
