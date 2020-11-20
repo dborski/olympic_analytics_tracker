@@ -37,8 +37,9 @@ class Command(BaseCommand):
           sport=row['Sport']
         )
 
-        olympian.eventolympian_set.create(
-          event_id=event.id, 
+        EventOlympian.objects.get_or_create(
+          event_id=event.id,
+          olympian_id=olympian.id,
           medal=row['Medal']
         )
 
