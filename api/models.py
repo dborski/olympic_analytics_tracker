@@ -1,5 +1,14 @@
 from django.db import models
+from django.db.models import Count, Q
 
+def _olympian_payload(olympian):
+  return {
+      'name': olympian.name,
+      'team': olympian.team,
+      'age': olympian.age,
+      'sport': olympian.sport,
+      'total_medals_won': olympian.medal_count
+  }
 
 class Olympian(models.Model):
   GENDER = [
@@ -19,6 +28,17 @@ class Olympian(models.Model):
 
   def __str__(self):
     return self.name
+  
+  @classmethod
+  def all_olympians(cls):
+    medals = ['Gold', 'Silver', 'Bronze']
+
+    olympians = Olympian.objects.annotate(
+        medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=medals))
+    ).order_by('name')
+
+    return [_olympian_payload(olympian) for olympian in olympians]
+
     
 class Event(models.Model):
   name = models.CharField(max_length=100)
