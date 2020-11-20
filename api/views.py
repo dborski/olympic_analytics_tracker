@@ -1,11 +1,8 @@
 import json
 from django.shortcuts import render
-from django.http import JsonResponse
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse, QueryDict
 from rest_framework.views import APIView
 from api.models import Olympian
-# from django.contrib.auth.models import User
-# from django.core.exceptions import ObjectDoesNotExist
 
 
 def _error_payload(error, code=400):
@@ -22,9 +19,16 @@ def _olympians_payload(olympians):
 
 class OlympianList(APIView):
   def get(self, request):
-    olympians = Olympian.all_olympians()
+    params = request.GET
+
+    if params.__contains__('age'):
+      olympians = Olympian.youngest_oldest_olympian(params['age'])
+
+      return JsonResponse(_olympians_payload(olympians), status=200)
+    else:
+      olympians = Olympian.all_olympians()
     
-    return JsonResponse(_olympians_payload(olympians), status=200)
+      return JsonResponse(_olympians_payload(olympians), status=200)
 
 
 
