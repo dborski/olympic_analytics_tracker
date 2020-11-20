@@ -23,12 +23,11 @@ class OlympianList(APIView):
 
     if params.__contains__('age'):
       olympians = Olympian.youngest_oldest_olympian(params['age'])
-
-      return JsonResponse(_olympians_payload(olympians), status=200)
     else:
       olympians = Olympian.all_olympians()
     
-      return JsonResponse(_olympians_payload(olympians), status=200)
+    return JsonResponse(_olympians_payload(olympians), status=200)
+
 
 
 
