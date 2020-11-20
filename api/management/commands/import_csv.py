@@ -4,14 +4,14 @@ import csv
 import time
 
 
-file_location = './api/fixtures/olympic_data_2016.csv'
-
 class Command(BaseCommand):
+  def __init__(self):
+    self.file_location = './api/fixtures/olympic_data_2016.csv'
 
   def handle(self, *args, **options):
     print('Now starting import_csv script....')
 
-    with open(file_location, 'r') as csvfile:
+    with open(self.file_location, 'r') as csvfile:
       reader = csv.DictReader(csvfile)
       total_time = 0.
       dot_string = ''
@@ -37,8 +37,9 @@ class Command(BaseCommand):
           sport=row['Sport']
         )
 
-        olympian.eventolympian_set.create(
-          event_id=event.id, 
+        EventOlympian.objects.get_or_create(
+          event_id=event.id,
+          olympian_id=olympian.id,
           medal=row['Medal']
         )
 
