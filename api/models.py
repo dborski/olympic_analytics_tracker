@@ -39,7 +39,19 @@ class Olympian(models.Model):
 
     return [_olympian_payload(olympian) for olympian in olympians]
 
-    
+  @classmethod
+  def youngest_oldest_olympian(cls, age):
+    order = 'age' if age == 'youngest' else '-age'
+    medals = ['Gold', 'Silver', 'Bronze']
+
+    olympians = Olympian.objects.annotate(
+        medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=medals))
+    ).order_by(order)[:1]
+
+    return [_olympian_payload(olympian) for olympian in olympians]
+
+
+
 class Event(models.Model):
   name = models.CharField(max_length=100)
   games = models.CharField(max_length=100)
