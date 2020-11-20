@@ -25,6 +25,8 @@ class OlympianViewSet(TestCase):
   def test_happy_path_get_all_olympians(self):
     response = self.client.get('/api/v1/olympians')
 
+    json_response = response.json()
+
     expected = {
       'olympians': [
         {
@@ -52,4 +54,4 @@ class OlympianViewSet(TestCase):
     }
 
     self.assertEqual(response.status_code, 200)
-    self.assertEqual(response.data, expected)
+    self.assertEqual(json_response, expected)
