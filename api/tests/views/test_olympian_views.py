@@ -5,9 +5,9 @@ from ..factories import OlympianFactory, EventFactory, EventOlympianFactory
 
 class OlympianViewSet(TestCase):
   def setUp(self):
-    self.olympian1 = OlympianFactory(name='Curtis')
-    self.olympian2 = OlympianFactory(name='Albert')
-    self.olympian3 = OlympianFactory(name='Billy')
+    self.olympian1 = OlympianFactory(name='Curtis', age=22)
+    self.olympian2 = OlympianFactory(name='Albert', age=19)
+    self.olympian3 = OlympianFactory(name='Billy', age=30)
 
     self.event1 = EventFactory()
     self.event2 = EventFactory()
@@ -49,6 +49,26 @@ class OlympianViewSet(TestCase):
           'age': self.olympian1.age,
           'sport': self.olympian1.sport,
           'total_medals_won': 1
+        }
+      ]
+    }
+
+    self.assertEqual(response.status_code, 200)
+    self.assertEqual(json_response, expected)
+
+  def test_happy_path_get_youngest_olympian(self):
+    response = self.client.get('/api/v1/olympians?age=youngest')
+
+    json_response = response.json()
+
+    expected = {
+      'olympians': [
+        {
+          'name': self.olympian2.name,
+          'team': self.olympian2.team,
+          'age': self.olympian2.age,
+          'sport': self.olympian2.sport,
+          'total_medals_won': 2
         }
       ]
     }
