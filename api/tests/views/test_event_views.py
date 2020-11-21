@@ -56,6 +56,12 @@ class EventViewSet(TestCase):
         'event': self.event1.name,
         'medalists': [
             {
+                'name': self.olympian2.name,
+                'team': self.olympian2.team,
+                'age': self.olympian2.age,
+                'medal': 'Bronze'
+            },
+            {
                 'name': self.olympian3.name,
                 'team': self.olympian3.team,
                 'age': self.olympian3.age,
@@ -66,12 +72,6 @@ class EventViewSet(TestCase):
                 'team': self.olympian4.team,
                 'age': self.olympian4.age,
                 'medal': 'Silver'
-            },
-            {
-                'name': self.olympian2.name,
-                'team': self.olympian2.team,
-                'age': self.olympian2.age,
-                'medal': 'Bronze'
             }
         ]
     }
