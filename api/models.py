@@ -10,6 +10,12 @@ def _olympian_payload(olympian):
       'total_medals_won': olympian.medal_count
   }
 
+def _event_sports_payload(sport, events):
+  return {
+      'sport': sport,
+      'events': [event.name for event in events]
+  }
+
 class Olympian(models.Model):
   GENDER = [
     ('M', 'Male'),
@@ -74,6 +80,18 @@ class Event(models.Model):
 
   def __str__(self):
     return self.name
+  
+  @classmethod
+  def all_sorted_by_sport(cls):
+    sports = Event.objects.values_list('sport', flat=True)
+    unique_sports = sorted(list(set(sports)))
+    sorted_events = []
+
+    for sport in unique_sports:
+      events = Event.objects.filter(sport=sport)
+      sorted_events.append(_event_sports_payload(sport, events))
+
+    return sorted_events
 
 
 class EventOlympian(models.Model):
