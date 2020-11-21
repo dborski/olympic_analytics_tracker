@@ -7,6 +7,8 @@ Production Site: [Here](https://olympic-analytics-tracker-db.herokuapp.com/)
 ## Tech Stack
 * Django
 * PostgreSQL
+* Travis CI
+* Heroku
 
 ## API Endpoints
 
