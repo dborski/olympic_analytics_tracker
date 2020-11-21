@@ -24,8 +24,8 @@ def _olympian_stats_payload(stats):
         'total_competing_olympians': stats['total_olympians'],
         'average_weight': {
           'unit': 'kg',
-          'male_olympians': stats['male_avg'],
-          'female_olympians': stats['female_avg']
+          'male_olympians': round(stats['male_avg'], 1),
+          'female_olympians': round(stats['female_avg'], 1)
         },
         'average_age': round(stats['avg_age'], 1)
       }
