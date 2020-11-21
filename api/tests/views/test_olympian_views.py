@@ -95,6 +95,16 @@ class OlympianViewSet(TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertEqual(json_response, expected)
 
+  def test_sad_path_get_oldest_or_youngest_with_wrong_query_param(self):
+    response = self.client.get('/api/v1/olympians?age=yungest')
+
+    json_response = response.json()
+
+    expected = "The age query parameter must equal 'youngest' or 'oldest'"
+
+    self.assertEqual(response.status_code, 400)
+    self.assertEqual(json_response['errors'], expected)
+
   def test_happy_path_get_olympian_stats(self):
     response = self.client.get('/api/v1/olympian_stats')
 
