@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Count, Avg, Q, F
 
+
 def _olympian_payload(olympian):
   return {
       'name': olympian.name,
