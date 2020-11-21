@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Count, Q
+from django.db.models import Count, Avg, Q
 
 def _olympian_payload(olympian):
   return {
@@ -49,6 +49,15 @@ class Olympian(models.Model):
     ).order_by(order)[:1]
 
     return [_olympian_payload(olympian) for olympian in olympians]
+
+  @classmethod
+  def olympian_stats(cls):
+    return Olympian.objects.aggregate(
+        total_olympians=Count('id'),
+        avg_age=Avg('age'),
+        male_avg=Avg('weight', filter=Q(sex='M')),
+        female_avg=Avg('weight', filter=Q(sex='F'))
+    )
 
 
 class Event(models.Model):

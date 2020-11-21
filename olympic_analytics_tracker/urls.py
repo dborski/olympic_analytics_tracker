@@ -21,4 +21,5 @@ from api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/olympians', views.OlympianList.as_view()),
+    path('api/v1/olympian_stats', views.OlympianStats.as_view())
 ]
