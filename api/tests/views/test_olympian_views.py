@@ -5,9 +5,9 @@ from ..factories import OlympianFactory, EventFactory, EventOlympianFactory
 
 class OlympianViewSet(TestCase):
   def setUp(self):
-    self.olympian1 = OlympianFactory(name='Curtis', age=22, sex='M', weight=100)
-    self.olympian2 = OlympianFactory(name='Albert', age=19, sex='F', weight=150.5)
-    self.olympian3 = OlympianFactory(name='Billy', age=30, sex='M', weight=200)
+    self.olympian1 = OlympianFactory(name='Curtis', age=22, sex='M', weight=123)
+    self.olympian2 = OlympianFactory(name='Albert', age=19, sex='F', weight=150)
+    self.olympian3 = OlympianFactory(name='Billy', age=30, sex='M', weight=208)
 
     self.event1 = EventFactory()
     self.event2 = EventFactory()
@@ -106,8 +106,8 @@ class OlympianViewSet(TestCase):
         'total_competing_olympians': 3,
         'average_weight': {
           'unit': 'kg',
-          'male_olympians': 150.0,
-          'female_olympians': 150.5
+          'male_olympians': 165.5,
+          'female_olympians': 150.0
         },
         'average_age': 23.7
       }
