@@ -1,10 +1,7 @@
-import json
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse, QueryDict
+from django.http import JsonResponse
 from rest_framework.views import APIView
 from api.models import Olympian
 
-from django.db.models import Avg, Count, Q
 
 def _error_payload(error, code=400):
   return {
@@ -30,6 +27,7 @@ def _olympian_stats_payload(stats):
         'average_age': round(stats['avg_age'], 1)
       }
   }
+
 
 class OlympianList(APIView):
   def get(self, request):
