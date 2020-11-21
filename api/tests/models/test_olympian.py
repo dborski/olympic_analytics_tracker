@@ -5,9 +5,9 @@ from ..factories import OlympianFactory, EventFactory, EventOlympianFactory
 
 class OlympianModelTest(TestCase):
   def setUp(self):
-    self.olympian1 = OlympianFactory(name='Curtis', age=22)
-    self.olympian2 = OlympianFactory(name='Albert', age=19)
-    self.olympian3 = OlympianFactory(name='Billy', age=30)
+    self.olympian1 = OlympianFactory(name='Curtis', age=22, sex='M', weight=123)
+    self.olympian2 = OlympianFactory(name='Albert', age=19, sex='F', weight=150)
+    self.olympian3 = OlympianFactory(name='Billy', age=30, sex='M', weight=208)
 
     self.event1 = EventFactory()
     self.event2 = EventFactory()
@@ -74,5 +74,16 @@ class OlympianModelTest(TestCase):
     
     self.assertEqual(Olympian.youngest_oldest_olympian('youngest'), expected_youngest)
     self.assertEqual(Olympian.youngest_oldest_olympian('oldest'), expected_oldest)
+
+  def test_olympian_stats(self):
+
+    expected = {
+      'total_olympians': 3, 
+      'avg_age': 23.666666666666668,
+      'male_avg': 165.5, 
+      'female_avg': 150.0
+    }
+
+    self.assertEqual(Olympian.olympian_stats(), expected)
 
 
