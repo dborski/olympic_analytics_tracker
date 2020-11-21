@@ -1,3 +1,4 @@
+# Olympic Analytics Tracker
 [![Build Status](https://travis-ci.com/dborski/olympic_analytics_tracker.svg?branch=main)](https://travis-ci.com/dborski/olympic_analytics_tracker)
 
 Olympics Analytics Tracker is an API that has several analytical endpoints using data from the 2016 Summer Olympics. The data is imported by CSV and stored in the APIs database.
