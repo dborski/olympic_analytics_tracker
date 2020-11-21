@@ -2,9 +2,11 @@
 
 Olympics Analytics Tracker is an API that has several analytical endpoints created from data of the 2016 Summer Olympics. The data is imported by CSV and stored in the APIs database.
 
-This application was created by [Derek Borski](https://github.com/dborski)
 
 Production Site: [Here](https://olympic-analytics-tracker-db.herokuapp.com/)
+
+## Contributors
+* [Derek Borski](https://github.com/dborski)
 
 ## Tech Stack
 * Django
