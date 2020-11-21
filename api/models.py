@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Count, Avg, Q
+from django.db.models import Count, Avg, Q, F
 
 def _olympian_payload(olympian):
   return {
@@ -15,6 +15,15 @@ def _event_sports_payload(sport, events):
       'sport': sport,
       'events': [event.name for event in events]
   }
+
+def _event_medalists_payload(olympian):
+  return {
+      'name': olympian.name,
+      'team': olympian.team,
+      'age': olympian.age,
+      'medal': olympian.medal
+  }
+
 
 class Olympian(models.Model):
   GENDER = [
@@ -64,6 +73,20 @@ class Olympian(models.Model):
         male_avg=Avg('weight', filter=Q(sex='M')),
         female_avg=Avg('weight', filter=Q(sex='F'))
     )
+  
+  @classmethod
+  def medalists_by_event(cls, event_id):
+    medals = ['Gold', 'Silver', 'Bronze']
+    
+    olympians = Olympian.objects.filter(
+        eventolympian__event_id=event_id
+    ).annotate(
+        medal=F('eventolympian__medal')
+    ).filter(
+      Q(medal__in=medals)
+    )
+
+    return [_event_medalists_payload(olympian) for olympian in olympians]
 
 
 class Event(models.Model):
