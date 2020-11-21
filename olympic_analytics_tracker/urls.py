@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/olympians', views.OlympianList.as_view()),
     path('api/v1/olympian_stats', views.OlympianStats.as_view()),
-    path('api/v1/events', views.EventList.as_view())
+    path('api/v1/events', views.EventList.as_view()),
+    path('api/v1/events/<int:pk>/medalists', views.EventMedalists.as_view())
 ]
