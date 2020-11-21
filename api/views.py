@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
-from api.models import Olympian
+from api.models import Olympian, Event
 
 
 def _error_payload(error, code=400):
@@ -13,6 +13,11 @@ def _error_payload(error, code=400):
 def _olympians_payload(olympians):
   return {
       'olympians': olympians
+  }
+
+def _events_payload(events):
+  return {
+      'events': events
   }
 
 def _olympian_stats_payload(stats):
@@ -46,3 +51,10 @@ class OlympianStats(APIView):
     olympian_stats = Olympian.olympian_stats()
      
     return JsonResponse(_olympian_stats_payload(olympian_stats), status=200)
+
+
+class EventList(APIView):
+  def get(self, request):
+    all_events = Event.all_sorted_by_sport()
+
+    return JsonResponse(_events_payload(all_events), status=200)
