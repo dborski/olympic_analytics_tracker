@@ -77,14 +77,14 @@ class Olympian(models.Model):
   @classmethod
   def medalists_by_event(cls, event_id):
     medals = ['Gold', 'Silver', 'Bronze']
-    
+
     olympians = Olympian.objects.filter(
         eventolympian__event_id=event_id
     ).annotate(
         medal=F('eventolympian__medal')
     ).filter(
       Q(medal__in=medals)
-    )
+    ).order_by('name')
 
     return [_event_medalists_payload(olympian) for olympian in olympians]
 

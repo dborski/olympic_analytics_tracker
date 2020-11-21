@@ -88,16 +88,16 @@ class OlympianModelTest(TestCase):
   def test_medalists_by_event(self):
     expected = [
       {
-        'name': self.olympian1.name,
-        'team': self.olympian1.team,
-        'age': self.olympian1.age,
-        'medal': 'Bronze'
-      },
-      {
         'name': self.olympian2.name,
         'team': self.olympian2.team,
         'age': self.olympian2.age,
         'medal': 'Silver'
+      },
+      {
+        'name': self.olympian1.name,
+        'team': self.olympian1.team,
+        'age': self.olympian1.age,
+        'medal': 'Bronze'
       }
     ]
 

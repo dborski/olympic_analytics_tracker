@@ -4,11 +4,11 @@ from ..factories import EventFactory, OlympianFactory, EventOlympianFactory
 
 class EventViewSet(TestCase):
   def setUp(self):
-    self.olympian1 = OlympianFactory()
-    self.olympian2 = OlympianFactory()
-    self.olympian3 = OlympianFactory()
-    self.olympian4 = OlympianFactory()
-    self.olympian5 = OlympianFactory()
+    self.olympian1 = OlympianFactory(name='Allie')
+    self.olympian2 = OlympianFactory(name='Holly')
+    self.olympian3 = OlympianFactory(name='Jim')
+    self.olympian4 = OlympianFactory(name='Sal')
+    self.olympian5 = OlympianFactory(name='Kate')
 
     self.event1 = EventFactory(sport='Cycling')
     self.event2 = EventFactory(sport='Archery')
