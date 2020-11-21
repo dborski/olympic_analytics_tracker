@@ -80,7 +80,7 @@ class EventMedalists(APIView):
     except ObjectDoesNotExist:
       return JsonResponse(_error_payload('No event found by that ID'), status=404)
 
-    medalists = Olympian.medalists_by_event(pk)
     event_name = event.name
+    medalists = Olympian.medalists_by_event(pk)
 
     return JsonResponse(_medalists_payload(event_name, medalists), status=200)
