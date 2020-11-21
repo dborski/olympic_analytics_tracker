@@ -77,3 +77,13 @@ class EventViewSet(TestCase):
     }
 
     self.assertEqual(json_response, expected)
+
+  def test_sad_path_get_medalists_with_incorrect_event_id(self):
+    response = self.client.get(f'/api/v1/events/0/medalists')
+
+    json_response = response.json()
+
+    expected = 'No event found by that ID'
+
+    self.assertEqual(response.status_code, 404)
+    self.assertEqual(json_response['errors'], expected)
