@@ -20,6 +20,12 @@ def _events_payload(events):
       'events': events
   }
 
+def _medalists_payload(event, medalists):
+  return {
+      'event': event,
+      'medalists': medalists
+  }
+
 def _olympian_stats_payload(stats):
   return {
       'olympian_stats': {
@@ -58,3 +64,11 @@ class EventList(APIView):
     all_events = Event.all_sorted_by_sport()
 
     return JsonResponse(_events_payload(all_events), status=200)
+
+
+class EventMedalists(APIView):
+  def get(self, request, pk):
+    event_name = Event.objects.get(id=pk).name
+    medalists = Olympian.medalists_by_event(pk)
+
+    return JsonResponse(_medalists_payload(event_name, medalists), status=200)

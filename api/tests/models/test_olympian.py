@@ -76,7 +76,6 @@ class OlympianModelTest(TestCase):
     self.assertEqual(Olympian.youngest_oldest_olympian('oldest'), expected_oldest)
 
   def test_olympian_stats(self):
-
     expected = {
       'total_olympians': 3, 
       'avg_age': 23.666666666666668,
@@ -86,4 +85,20 @@ class OlympianModelTest(TestCase):
 
     self.assertEqual(Olympian.olympian_stats(), expected)
 
+  def test_medalists_by_event(self):
+    expected = [
+      {
+        'name': self.olympian2.name,
+        'team': self.olympian2.team,
+        'age': self.olympian2.age,
+        'medal': 'Silver'
+      },
+      {
+        'name': self.olympian1.name,
+        'team': self.olympian1.team,
+        'age': self.olympian1.age,
+        'medal': 'Bronze'
+      }
+    ]
 
+    self.assertEqual(Olympian.medalists_by_event(self.event2.id), expected)
