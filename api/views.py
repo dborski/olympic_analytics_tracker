@@ -47,10 +47,16 @@ class OlympianList(APIView):
     age_params = ['youngest', 'oldest']
 
     if params.__contains__('age') and params['age'] in age_params:
-      olympians = Olympian.youngest_oldest_olympian(params['age'])
+      try:
+        olympians = Olympian.youngest_oldest_olympian(params['age'])
+      except:
+        JsonResponse(_error_payload('There was an error in the request'), status=404)
 
     elif not params.__contains__('age'):
-      olympians = Olympian.all_olympians()
+      try:
+        olympians = Olympian.all_olympians()
+      except:
+        JsonResponse(_error_payload('There was an error in the request'), status=404)
 
     else:
       error = "The age query parameter must equal 'youngest' or 'oldest'"
@@ -61,14 +67,20 @@ class OlympianList(APIView):
 
 class OlympianStats(APIView):
   def get(self, request):
-    olympian_stats = Olympian.olympian_stats()
+    try:
+      olympian_stats = Olympian.olympian_stats()
+    except:
+      return JsonResponse(_error_payload('There was an error in the request'), status=404)
      
     return JsonResponse(_olympian_stats_payload(olympian_stats), status=200)
 
 
 class EventList(APIView):
   def get(self, request):
-    all_events = Event.all_sorted_by_sport()
+    try:
+      all_events = Event.all_sorted_by_sport()
+    except:
+      return JsonResponse(_error_payload('There was an error in the request'), status=404)
 
     return JsonResponse(_events_payload(all_events), status=200)
 
@@ -76,7 +88,7 @@ class EventList(APIView):
 class EventMedalists(APIView):
   def get(self, request, pk):
     try:
-      event = Event.objects.get(id=pk)
+      event = Event.objects.get(pk=pk)
     except ObjectDoesNotExist:
       return JsonResponse(_error_payload('No event found by that ID'), status=404)
 
