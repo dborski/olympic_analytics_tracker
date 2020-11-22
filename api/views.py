@@ -50,13 +50,13 @@ class OlympianList(APIView):
       try:
         olympians = Olympian.youngest_oldest_olympian(params['age'])
       except:
-        JsonResponse(_error_payload('There was an error in the request'), status=404)
+        return JsonResponse(_error_payload('There was an error in the request'), status=404)
 
     elif not params.__contains__('age'):
       try:
         olympians = Olympian.all_olympians()
       except:
-        JsonResponse(_error_payload('There was an error in the request'), status=404)
+        return JsonResponse(_error_payload('There was an error in the request'), status=404)
 
     else:
       error = "The age query parameter must equal 'youngest' or 'oldest'"
