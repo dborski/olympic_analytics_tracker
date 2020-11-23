@@ -10,3 +10,8 @@ class EventOlympianTest(TestCase):
 
   def test_instance_of_eventolympian(self):
     self.assertEqual(self.eventolympian1.medal, 'Silver')
+
+  def test_medal_choices(self):
+    expected = ['Gold', 'Silver', 'Bronze']
+
+    self.assertEqual(EventOlympian.medal_choices(), expected)
