@@ -18,7 +18,7 @@ class OlympianList(APIView):
 
     elif not params.__contains__('age'):
       try:
-        olympians = Olympian.all_olympians()
+        olympians = Olympian.all_olympians()[0]
       except:
         return JsonResponse(pl.error_payload('There was an error in the request', 404), status=404)
 

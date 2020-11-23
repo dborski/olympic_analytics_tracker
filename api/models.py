@@ -29,7 +29,7 @@ class Olympian(models.Model):
         medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=EventOlympian.medal_choices()))
     ).order_by('name')
 
-    return [pl.olympian_payload(olympian) for olympian in olympians]
+    return [pl.olympian_payload(olympian) for olympian in olympians], olympians
 
   @classmethod
   def youngest_oldest_olympian(cls, age):
