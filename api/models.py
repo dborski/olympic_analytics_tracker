@@ -47,10 +47,9 @@ class Olympian(models.Model):
   
   @classmethod
   def all_olympians(cls):
-    medals = ['Gold', 'Silver', 'Bronze']
 
     olympians = Olympian.objects.annotate(
-        medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=medals))
+        medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=EventOlympian.medal_choices()))
     ).order_by('name')
 
     return [_olympian_payload(olympian) for olympian in olympians]
@@ -58,10 +57,9 @@ class Olympian(models.Model):
   @classmethod
   def youngest_oldest_olympian(cls, age):
     order = 'age' if age == 'youngest' else '-age'
-    medals = ['Gold', 'Silver', 'Bronze']
 
     olympians = Olympian.objects.annotate(
-        medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=medals))
+        medal_count=Count('eventolympian__medal', filter=Q(eventolympian__medal__in=EventOlympian.medal_choices()))
     ).order_by(order)[:1]
 
     return [_olympian_payload(olympian) for olympian in olympians]
@@ -77,14 +75,12 @@ class Olympian(models.Model):
   
   @classmethod
   def medalists_by_event(cls, event_id):
-    medals = ['Gold', 'Silver', 'Bronze']
-
     olympians = Olympian.objects.filter(
         eventolympian__event_id=event_id
     ).annotate(
         medal=F('eventolympian__medal')
     ).filter(
-      Q(medal__in=medals)
+      Q(medal__in=EventOlympian.medal_choices())
     ).order_by('name')
 
     return [_event_medalists_payload(olympian) for olympian in olympians]
@@ -124,4 +120,13 @@ class EventOlympian(models.Model):
   medal = models.CharField(max_length=100)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
+
+  @classmethod
+  def medal_choices(cls):
+    return [
+      'Gold',
+      'Silver',
+      'Bronze'
+    ]
+
 
