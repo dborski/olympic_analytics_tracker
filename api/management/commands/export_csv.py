@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand, CommandError
 from api.models import Olympian
 import csv
 from datetime import date
-# import time
 
 
 class Command(BaseCommand):
