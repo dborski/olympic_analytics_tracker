@@ -167,6 +167,11 @@ Response Body:
 ```
 GET /api/v1/events/:event_id/medalists
 ```
+Description:	
+- Displays a list of all medalists for a specific event	
+- Returns a 200 status code on success	
+- *Note: Not all medalists for each event are included in the sample data*
+
 Response Body:
 ```
 {
